@@ -1,24 +1,40 @@
 <script>
 
 import { store } from '../data/store';
+import axios from "../../node_modules/axios"
+
 
 export default {
   name: "Search",
   data() {
     return {
-      store
+      store,
+      search: ""
     }
   },
-  mounted() {
-    console.log("Sono il search");
-    console.log(this.store.archetypeList);
+  methods: {
+    changeAPI(){
+      store.apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=" + this.search
+      console.log(store.apiUrl);
+
+      axios.get(store.apiUrl)
+        .then((response) => {
+          // handle success
+          console.log(response.data.data);
+          store.cardList = response.data.data;
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
+    }
   },
 }
 </script>
 
 <template>
   <div>
-    <select class="form-select" aria-label="Default select example">
+    <select @change="changeAPI()" v-model="search" class="form-select" aria-label="Default select example">
       <option v-for="(el , index) in store.archetypeList" :key="'el-'+ index">{{ el }}</option>
     </select>
   </div>
