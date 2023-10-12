@@ -1,16 +1,19 @@
 <script>
 export default {
-  name: "Card"
+  name: "Card",
+  props:{
+    cardObj : Object,
+  }
 }
 </script>
 
 <template>
   <div class="col">
-    <div class="card" style="width: 12rem;">
-      <img src="https://images.ygoprodeck.com/images/cards/34541863.jpg" class="card-img-top" alt="...">
+    <div class="card" style="width: 13rem;">
+      <img :src="cardObj.card_images[0].image_url" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <h5 class="card-title">{{ cardObj.name }}</h5>
+        <p class="card-text">{{ cardObj.archetype }}</p>
       </div>
     </div>
   </div>
@@ -19,10 +22,13 @@ export default {
 
 <style lang="scss" scoped>
   .col{
+    padding: 8px;
     display: flex;
     justify-content: center;
     .card{
       padding: 8px;
+      background-color: #d48f38;
+      text-align: center;
     }
   }
 </style>
