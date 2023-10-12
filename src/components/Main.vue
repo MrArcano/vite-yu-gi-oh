@@ -13,11 +13,19 @@ export default {
 
 <template>
 
-  
+  <main>
+    <div class="container">
+      <Search />
+      <CardContainer />
+    </div>
+  </main>
   
 </template>
 
 
-<style>
-
+<style lang="scss" scoped>
+  main{
+    background-color: #d48f38;
+    min-height: 100vh;
+  }
 </style>
