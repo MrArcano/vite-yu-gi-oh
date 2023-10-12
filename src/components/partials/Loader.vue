@@ -5,11 +5,11 @@ export default {
 </script>
 
 <template>
-  <span class="loader"></span>
+  <span class="loader-css"></span>
 </template>
 
 <style lang="scss" scoped>
-  .loader {
+  .loader-css {
     width: 12px;
     height: 12px;
     border-radius: 50%;

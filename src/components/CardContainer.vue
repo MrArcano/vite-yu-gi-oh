@@ -20,11 +20,20 @@ export default {
         .then((response) => {
           // handle success
           store.cardList = response.data.data;
+          this.createListArchetype()
         })
         .catch((error) => {
           // handle error
           console.log(error);
         })
+    },
+
+    createListArchetype(){
+      store.archetypeList = store.cardList.forEach((el) => {
+        if(!store.archetypeList.includes(el.archetype)){
+          store.archetypeList.push(el.archetype);
+        }
+      })
     }
   },
   mounted() {

@@ -1,16 +1,25 @@
 <script>
+
+import { store } from '../data/store';
+
 export default {
-  name: "Search"
+  name: "Search",
+  data() {
+    return {
+      store
+    }
+  },
+  mounted() {
+    console.log("Sono il search");
+    console.log(this.store.archetypeList);
+  },
 }
 </script>
 
 <template>
   <div>
     <select class="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
+      <option v-for="(el , index) in store.archetypeList" :key="'el-'+ index">{{ el }}</option>
     </select>
   </div>
 </template>
