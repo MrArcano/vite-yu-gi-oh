@@ -1,13 +1,13 @@
 <script>
-import Card from './partials/Card.vue';
-import Loader from './partials/Loader.vue';
+import CardVue from './partials/Card.vue';
+import Result from './Result.vue';
 import { store } from "../data/store"
 import axios from "../../node_modules/axios"
 export default {
   name: "CardContainer",
   components:{
-    Card,
-    Loader
+    CardVue,
+    Result
   },
   data() {
     return {
@@ -20,6 +20,7 @@ export default {
         .then((response) => {
           // handle success
           store.cardList = response.data.data;
+          store.cardMeta = response.data.meta
         })
         .catch((error) => {
           // handle error
@@ -37,19 +38,6 @@ export default {
           console.log(error);
         })
     },
-
-    /* 
-    createListArchetype(){
-      store.cardList.forEach((el) => {
-        if(!store.archetypeList.includes(el.archetype)){
-          if(el.archetype){
-            store.archetypeList.push(el.archetype);
-          }
-        }
-      })
-      store.archetypeList.sort();
-    } 
-    */
   },
   mounted() {
     this.getAPI();
@@ -59,15 +47,12 @@ export default {
 </script>
 
 <template>
-
   <div class="container-csm">
-    <div class="result">
-      <p v-if="store.cardList.length <= 0"><Loader /></p>
-      <p v-else>Found {{ store.cardList.length }} cards</p>
-    </div>
+    <Result />
     <div class="row">
-      <Card v-for="el in store.cardList" :key="el.id" :cardObj = el />
+      <CardVue v-for="el in store.cardList" :key="el.id" :cardObj = el />
     </div>
+    <Result />
   </div>
   
 </template>
@@ -77,12 +62,5 @@ export default {
   .container-csm{
     background-color: white;
     padding: 32px;
-    .result{
-      background-color: #212529;
-      color: white;
-      p{
-        padding: 16px 8px;
-      }
-    }
   }
 </style>
