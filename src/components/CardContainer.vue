@@ -20,8 +20,17 @@ export default {
         .then((response) => {
           // handle success
           store.cardList = response.data.data;
-          this.createListArchetype();
-          console.log(store.cardList);
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        })
+        
+      // create list ArcheType
+      axios.get("https://db.ygoprodeck.com/api/v7/archetypes.php")
+        .then((response) => {
+          // handle success
+          store.archetypeList = response.data;
         })
         .catch((error) => {
           // handle error
@@ -29,8 +38,8 @@ export default {
         })
     },
 
+    /* 
     createListArchetype(){
-
       store.cardList.forEach((el) => {
         if(!store.archetypeList.includes(el.archetype)){
           if(el.archetype){
@@ -39,7 +48,8 @@ export default {
         }
       })
       store.archetypeList.sort();
-    }
+    } 
+    */
   },
   mounted() {
     this.getAPI();

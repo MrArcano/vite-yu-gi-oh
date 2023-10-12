@@ -14,7 +14,7 @@ export default {
   },
   methods: {
     changeAPI(){
-      store.apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=" + this.search
+      store.apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=it&archetype=" + this.search
       console.log(store.apiUrl);
 
       axios.get(store.apiUrl)
@@ -35,7 +35,7 @@ export default {
 <template>
   <div>
     <select @change="changeAPI()" v-model="search" class="form-select" aria-label="Default select example">
-      <option v-for="(el , index) in store.archetypeList" :key="'el-'+ index">{{ el }}</option>
+      <option v-for="(el , index) in store.archetypeList" :key="'el-'+ index">{{ el.archetype_name }}</option>
     </select>
   </div>
 </template>
