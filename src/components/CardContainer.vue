@@ -1,11 +1,13 @@
 <script>
 import Card from './partials/Card.vue';
+import Loader from './partials/Loader.vue';
 import { store } from "../data/store"
 import axios from "../../node_modules/axios"
 export default {
   name: "CardContainer",
   components:{
-    Card
+    Card,
+    Loader
   },
   data() {
     return {
@@ -35,7 +37,10 @@ export default {
 <template>
 
   <div class="container-csm">
-    <div class="result">Found {{ store.cardList.length }} cards</div>
+    <div class="result">
+      <p v-if="store.cardList.length <= 0"><Loader /></p>
+      <p v-else>Found {{ store.cardList.length }} cards</p>
+    </div>
     <div class="row">
       <Card v-for="el in store.cardList" :key="el.id" :cardObj = el />
     </div>
@@ -51,7 +56,9 @@ export default {
     .result{
       background-color: #212529;
       color: white;
-      padding: 16px 8px;
+      p{
+        padding: 16px 8px;
+      }
     }
   }
 </style>

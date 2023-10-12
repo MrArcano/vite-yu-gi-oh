@@ -21,7 +21,6 @@ export default {
 .container{
   display: flex;
   align-items: center;
-  border: 1px solid black;
   .logo{
     width: 100px;
   }
