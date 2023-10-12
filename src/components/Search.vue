@@ -1,0 +1,14 @@
+<script>
+export default {
+  name: "Search"
+}
+</script>
+
+<template>
+  
+</template>
+
+
+<style>
+
+</style>
