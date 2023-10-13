@@ -1,8 +1,6 @@
 <script>
-
 import { store } from '../data/store';
-import axios from "../../node_modules/axios"
-
+import axios from "../../node_modules/axios";
 
 export default {
   name: "Search",

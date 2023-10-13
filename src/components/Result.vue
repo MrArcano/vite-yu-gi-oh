@@ -1,8 +1,8 @@
 <script>
 import Loader from './partials/Loader.vue';
 import NextPage from './partials/NextPage.vue';
-import { store } from "../data/store"
-import axios from "../../node_modules/axios"
+import { store } from "../data/store";
+import axios from "../../node_modules/axios";
 
 export default {
   name: "Result",
@@ -45,13 +45,20 @@ export default {
 
 <template>
   <div class="result">
-    <p v-if="store.cardMeta.total_rows <= 0"><Loader/></p>
-    <p v-if="!Object.keys(store.cardMeta).length">Found {{ store.cardList.length }} cards</p>
+    <!-- Loader visibile solo se store.cardList è vuoto -->
+    <p v-if="store.cardList.length <= 0"><Loader/></p>
 
     <div v-else>
-      <div @click="goPrev()" class="arrow left"><NextPage /></div>
-      <p>Page {{ store.cardMeta.total_pages - store.cardMeta.pages_remaining + 1 }}/{{ store.cardMeta.total_pages}} of {{ store.cardMeta.total_rows }} total cards</p>
-      <div @click="goNext()" class="arrow right"><NextPage /></div>
+      <!-- Se il mio oggetto store.cardMeta è vuoto vuol dire che sto facendo una ricerca -->
+      <p v-if="!Object.keys(store.cardMeta).length">Found {{ store.cardList.length }} cards</p>
+
+      <!-- Altrimenti visualizzo i dati del store.cardMeta -->
+      <div class="next-prev" v-else>
+        <div @click="goPrev()" class="arrow left"><NextPage /></div>
+        <p>Page {{ store.cardMeta.total_pages - store.cardMeta.pages_remaining + 1 }}/{{ store.cardMeta.total_pages}} of {{ store.cardMeta.total_rows }} total cards</p>
+        <div @click="goNext()" class="arrow right"><NextPage /></div>
+      </div>
+
     </div>
 
   </div>
@@ -65,7 +72,7 @@ export default {
           margin: 0;
           padding: 16px;
         }
-      >div{
+      .next-prev{
         display: flex;
         justify-content: space-between;
         align-items: center;

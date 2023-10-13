@@ -1,8 +1,9 @@
 <script>
 import CardVue from './partials/Card.vue';
 import Result from './Result.vue';
-import { store } from "../data/store"
-import axios from "../../node_modules/axios"
+import { store } from "../data/store";
+import axios from "../../node_modules/axios";
+
 export default {
   name: "CardContainer",
   components:{
