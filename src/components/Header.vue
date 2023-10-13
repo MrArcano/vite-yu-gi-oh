@@ -10,7 +10,7 @@ export default {
       <div class="logo">
         <img src="https://www.yugioh-world.com/wp-content/uploads/2016/12/yugioh_logo_full.png" alt="">
       </div>
-      <h1>Yu-Gi-Oh API</h1>
+      <a href="#"><h1>Yu-Gi-Oh API</h1></a>
     </div>
   </header>
 </template>

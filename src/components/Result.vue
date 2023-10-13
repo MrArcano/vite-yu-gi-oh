@@ -18,27 +18,16 @@ export default {
   methods: {
     goNext(){
       console.log("NEXT");
-      store.apiUrl = store.cardMeta.next_page;
-      console.log(store.apiUrl);
-      this.getAPI();
+      store.apiUrlBase = store.cardMeta.next_page;
+      console.log(store.apiUrlBase);
+      this.$emit('startSearch');
     },
     goPrev(){
       console.log("PREV");
-      store.apiUrl = store.cardMeta.previous_page;
-      this.getAPI();
+      store.apiUrlBase = store.cardMeta.previous_page;
+      console.log(store.apiUrlBase);
+      this.$emit('startSearch');
     },
-    getAPI(){
-      axios.get(store.apiUrl)
-        .then((response) => {
-          // handle success
-          store.cardList = response.data.data;
-          store.cardMeta = response.data.meta
-        })
-        .catch((error) => {
-          // handle error
-          console.log(error);
-        })
-    }
   },
 }
 </script>
@@ -46,11 +35,11 @@ export default {
 <template>
   <div class="result">
     <!-- Loader visibile solo se store.cardList è vuoto -->
-    <p v-if="store.cardList.length <= 0"><Loader/></p>
+    <p v-if="store.cardList.length < 0"><Loader/></p>
 
     <div v-else>
       <!-- Se il mio oggetto store.cardMeta è vuoto vuol dire che sto facendo una ricerca -->
-      <p v-if="!Object.keys(store.cardMeta).length">Found {{ store.cardList.length }} cards</p>
+      <p  v-if="!Object.keys(store.cardMeta).length" class="text-center">Found {{ store.cardList.length }} cards</p>
 
       <!-- Altrimenti visualizzo i dati del store.cardMeta -->
       <div class="next-prev" v-else>

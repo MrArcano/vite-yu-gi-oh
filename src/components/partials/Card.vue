@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
   .col{
-    padding: 8px;
+    padding: 8px 0;
     display: flex;
     justify-content: center;
     .card{
