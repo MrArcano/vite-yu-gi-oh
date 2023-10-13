@@ -1,6 +1,5 @@
 <script>
 import { store } from '../data/store';
-import axios from "../../node_modules/axios";
 
 export default {
   name: "Search",
@@ -12,7 +11,8 @@ export default {
   },
   methods: {
     searchArcheType(){
-      store.apiUrlBase = "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=it&archetype=" + this.search;
+      store.archetype = this.search;
+      store.offset = 0;
       store.cardMeta = {};
       this.$emit('startSearch');
     }

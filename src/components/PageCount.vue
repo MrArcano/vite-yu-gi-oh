@@ -18,8 +18,7 @@ export default {
     goNext(){
       if(store.cardMeta.next_page){
         console.log("NEXT");
-        store.apiUrlBase = store.cardMeta.next_page;
-        console.log(store.apiUrlBase);
+        store.offset = store.cardMeta.next_page_offset;
         this.$emit('startSearch');
       }else{
         console.log("NEXT non possibile");
@@ -29,8 +28,7 @@ export default {
     goPrev(){
       if(store.cardMeta.previous_page){
         console.log("PREV");
-        store.apiUrlBase = store.cardMeta.previous_page;
-        console.log(store.apiUrlBase);
+        store.offset = store.cardMeta.previous_page_offset,
         this.$emit('startSearch');
       }else{
         console.log("PREV non possibile");

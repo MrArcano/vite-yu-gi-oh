@@ -17,7 +17,13 @@ export default {
   methods: {
     getAPI(){
       store.isLoading = true;
-      axios.get(store.apiUrlBase)
+      axios.get(store.apiUrlBase,{
+        params:{
+          num: store.num,
+          offset: store.offset,
+          archetype: store.archetype,
+        }
+      })
         .then((response) => {
           // handle success
           store.isLoading = false;
