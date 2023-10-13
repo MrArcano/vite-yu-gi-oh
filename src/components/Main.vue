@@ -1,7 +1,7 @@
 <script>
 import CardContainer from './CardContainer.vue';
 import Search from './Search.vue';
-import Result from './Result.vue';
+import PageCount from './PageCount.vue';
 
 import { store } from "../data/store";
 
@@ -12,13 +12,15 @@ export default {
   components:{
     CardContainer,
     Search,
-    Result
+    PageCount
   },
   methods: {
     getAPI(){
+      store.isLoading = true;
       axios.get(store.apiUrlBase)
         .then((response) => {
           // handle success
+          store.isLoading = false;
           store.cardList = response.data.data;
           if(response.data.meta){
             store.cardMeta = response.data.meta
@@ -26,6 +28,7 @@ export default {
         })
         .catch((error) => {
           // handle error
+          store.isLoading = false;
           console.log(error);
           store.cardList = [];
         })
@@ -54,11 +57,11 @@ export default {
 <template>
 
   <main>
-    <div class="container">
+    <div class="container pb-5">
       <Search @startSearch="getAPI" />
-      <Result @startSearch="getAPI" />
+      <PageCount @startSearch="getAPI" />
       <CardContainer />
-      <Result @startSearch="getAPI" />
+      <PageCount @startSearch="getAPI" />
     </div>
   </main>
   

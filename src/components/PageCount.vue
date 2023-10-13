@@ -2,10 +2,9 @@
 import Loader from './partials/Loader.vue';
 import NextPage from './partials/NextPage.vue';
 import { store } from "../data/store";
-import axios from "../../node_modules/axios";
 
 export default {
-  name: "Result",
+  name: "PageCount",
   components:{
     Loader,
     NextPage
@@ -17,16 +16,25 @@ export default {
   },
   methods: {
     goNext(){
-      console.log("NEXT");
-      store.apiUrlBase = store.cardMeta.next_page;
-      console.log(store.apiUrlBase);
-      this.$emit('startSearch');
+      if(store.cardMeta.next_page){
+        console.log("NEXT");
+        store.apiUrlBase = store.cardMeta.next_page;
+        console.log(store.apiUrlBase);
+        this.$emit('startSearch');
+      }else{
+        console.log("NEXT non possibile");
+      }
+      
     },
     goPrev(){
-      console.log("PREV");
-      store.apiUrlBase = store.cardMeta.previous_page;
-      console.log(store.apiUrlBase);
-      this.$emit('startSearch');
+      if(store.cardMeta.previous_page){
+        console.log("PREV");
+        store.apiUrlBase = store.cardMeta.previous_page;
+        console.log(store.apiUrlBase);
+        this.$emit('startSearch');
+      }else{
+        console.log("PREV non possibile");
+      }
     },
   },
 }
@@ -34,8 +42,8 @@ export default {
 
 <template>
   <div class="result">
-    <!-- Loader visibile solo se store.cardList è vuoto -->
-    <p v-if="store.cardList.length < 0"><Loader/></p>
+    <!-- Loader visibile -->
+    <p v-if="store.isLoading"><Loader/></p>
 
     <div v-else>
       <!-- Se il mio oggetto store.cardMeta è vuoto vuol dire che sto facendo una ricerca -->
@@ -44,7 +52,7 @@ export default {
       <!-- Altrimenti visualizzo i dati del store.cardMeta -->
       <div class="next-prev" v-else>
         <div @click="goPrev()" class="arrow left"><NextPage /></div>
-        <p>Page {{ store.cardMeta.total_pages - store.cardMeta.pages_remaining + 1 }}/{{ store.cardMeta.total_pages}} of {{ store.cardMeta.total_rows }} total cards</p>
+        <p>Page {{ store.cardMeta.total_pages - store.cardMeta.pages_remaining + 1 }}/{{ store.cardMeta.total_pages + 1}} of {{ store.cardMeta.total_rows }} total cards</p>
         <div @click="goNext()" class="arrow right"><NextPage /></div>
       </div>
 
