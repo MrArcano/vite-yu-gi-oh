@@ -46,11 +46,14 @@ export default {
 <template>
   <div class="result">
     <p v-if="store.cardMeta.total_rows <= 0"><Loader/></p>
+    <p v-if="!Object.keys(store.cardMeta).length">Found {{ store.cardList.length }} cards</p>
+
     <div v-else>
-      <div @click="goPrev()" class="left"><NextPage /></div>
+      <div @click="goPrev()" class="arrow left"><NextPage /></div>
       <p>Page {{ store.cardMeta.total_pages - store.cardMeta.pages_remaining + 1 }}/{{ store.cardMeta.total_pages}} of {{ store.cardMeta.total_rows }} total cards</p>
-      <div @click="goNext()" class="right"><NextPage /></div>
+      <div @click="goNext()" class="arrow right"><NextPage /></div>
     </div>
+
   </div>
 </template>
 
@@ -58,20 +61,23 @@ export default {
   .result{
       background-color: #212529;
       color: white;
-      div{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        p{
+      p{
           margin: 0;
           padding: 16px;
         }
-        .right{
-          transform: rotate(270deg) translateY(-60px);
+      >div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .arrow{
+          cursor: pointer;
+          &.left{
+            transform: rotate(180deg);
+          }
         }
-        .left{
-          transform: rotate(90deg) translateY(-60px);
-        }
+        
+        
       }
     }
 </style>

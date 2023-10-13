@@ -5,54 +5,56 @@ export default {
 </script>
 
 <template>
-  <div class="arrow-container">
-    <div class="arrow">
-      <p></p>
-      <p></p>
-      <p></p>
-    </div>
+
+  <div class="arrow">
+    <div class="cevron"></div>
+    <div class="cevron"></div>
+    <div class="cevron"></div>
   </div>
+
 </template>
 
 <style lang="scss" scoped>
 
-.arrow-container{
-  position: relative;
-}
 .arrow {
-  cursor: pointer;
+  display: flex;
+  width: 100px;
+  height: 50px;
+  justify-content: center;
+  align-items: center;
 }
 
-.arrow p {
-    display: block;
-    width: 18px;
+.arrow .cevron {
+    width: 20px;
     aspect-ratio: 1/1;
-    border-bottom: 5px solid white;
-    border-right: 5px solid white;
-    transform: rotate(45deg);
-    margin: -10px;
-    animation: animate 2s infinite;
+
+    border-bottom: 4px solid white;
+    border-right: 4px solid white;
+    transform: rotate(-45deg);
+    
+    margin: -2px;
+    animation: animate 4s infinite;
 }
 
-.arrow p:nth-child(2) {
+.arrow .cevron:nth-child(2) {
     animation-delay: -0.2s;
 }
 
-.arrow p:nth-child(3) {
+.arrow .cevron:nth-child(3) {
     animation-delay: -0.4s;
 }
 
 @keyframes animate {
     0% {
         opacity: 0;
-        transform: rotate(45deg) translate(-20px, -20px);
+        transform: rotate(-45deg) translate(-10px,-10px);
     }
     50% {
         opacity: 1;
     }
     100% {
         opacity: 0;
-        transform: rotate(45deg) translate(20px, 20px);
+        transform: rotate(-45deg) translate(10px,10px);
     }
 }
 </style>

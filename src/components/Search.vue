@@ -15,13 +15,13 @@ export default {
   methods: {
     changeAPI(){
       store.apiUrl = "https://db.ygoprodeck.com/api/v7/cardinfo.php?language=it&archetype=" + this.search
-      console.log(store.apiUrl);
 
       axios.get(store.apiUrl)
         .then((response) => {
           // handle success
-          console.log(response.data.data);
           store.cardList = response.data.data;
+          store.cardMeta = {};
+          console.log(store.cardMeta);
         })
         .catch((error) => {
           // handle error
